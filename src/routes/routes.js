@@ -6,6 +6,7 @@ export const routes = [
     element: lazy(async () => await import('@/pages/Auth/Login'))
   },
   {
+    path: '',
     layout: lazy(async () => await import('@/pages/Shared/Layout')),
     children: [
       {
