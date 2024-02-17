@@ -2,15 +2,18 @@ import { useEffect, useState } from 'react'
 import io from 'socket.io-client'
 import Card from './Card'
 import CardObject from './CardObject'
+import axios from 'axios'
 
 function Home () {
   const [decodedPayload, setDecodedPayload] = useState(null)
 
   useEffect(() => {
-    console.log(import.meta.env.VITE_API_URL)
-    const socket = io(import.meta.env.VITE_API_URL)
+    console.log(import.meta.env.VITE_URL_API_SOCKET)
+    const socket = io(import.meta.env.VITE_URL_API_SOCKET)
 
-    socket.on('dataVacas', (data) => {
+    fetchData()
+
+    socket.on('newDataCollar', (data) => {
       setDecodedPayload(data)
     })
 
@@ -18,6 +21,11 @@ function Home () {
       socket.disconnect()
     }
   }, [])
+
+  async function fetchData () {
+    const response = await axios.get('http://localhost:3002/api/cows')
+    console.log(response.data)
+  }
 
   if (!decodedPayload) {
     return (
