@@ -1,5 +1,6 @@
 import { Link, NavLink } from 'react-router-dom'
 import { FaHouse, FaCow } from 'react-icons/fa6'
+import useLayoutContext from '../hooks/useLayoutContext'
 
 const OPCIONS = [
   { name: 'Home', href: '/', icon: FaHouse },
@@ -7,8 +8,15 @@ const OPCIONS = [
 ]
 
 function Menu () {
+  const { openMenu } = useLayoutContext()
+
   return (
-    <aside className='bg-white shadow-sm -translate-x-80 fixed inset-0 z-50 my-4 ml-4 w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 border'>
+    <aside
+      className={`
+      ${
+        openMenu ? 'translate-x-0' : '-translate-x-80'
+      } bg-white shadow-sm fixed inset-0 z-50 my-4 ml-4 w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 border`}
+    >
       <div className='m-4 text-center'>
         <Link to='/' className='text-2xl font-bold text-slate-700'>
           Cows Udenar
