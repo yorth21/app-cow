@@ -5,7 +5,7 @@ import Navbar from './components/Navbar'
 
 function Layout () {
   return (
-    <div className='min-h-screen bg-neutral-200'>
+    <div className='min-h-screen'>
       <Menu />
 
       <div className='p-4 xl:ml-80'>
