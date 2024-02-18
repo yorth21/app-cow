@@ -16,6 +16,15 @@ export const routes = [
       {
         path: 'cows',
         element: lazy(async () => await import('@/pages/Cows'))
+      },
+      {
+        path: 'cow',
+        children: [
+          {
+            path: ':id',
+            element: lazy(async () => await import('@/pages/Cow'))
+          }
+        ]
       }
     ]
   }
