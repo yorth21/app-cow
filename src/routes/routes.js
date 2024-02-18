@@ -15,14 +15,14 @@ export const routes = [
       },
       {
         path: 'cows',
-        element: lazy(async () => await import('@/pages/Cows'))
-      },
-      {
-        path: 'cow',
         children: [
           {
+            path: '',
+            element: lazy(async () => await import('@/pages/Cows'))
+          },
+          {
             path: ':id',
-            element: lazy(async () => await import('@/pages/Cow'))
+            element: lazy(async () => await import('@/pages/Cows/pages/Cow'))
           }
         ]
       }
