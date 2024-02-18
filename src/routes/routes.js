@@ -1,20 +1,21 @@
 import { lazy } from 'react'
+import { PATHS } from './paths'
 
 export const routes = [
   {
-    path: 'login',
+    path: PATHS.LOGIN,
     element: lazy(async () => await import('@/pages/Auth/Login'))
   },
   {
-    path: '',
+    path: PATHS.HOME,
     layout: lazy(async () => await import('@/pages/Shared/Layout')),
     children: [
       {
-        path: '',
+        path: PATHS.HOME,
         element: lazy(async () => await import('@/pages/Home'))
       },
       {
-        path: 'cows',
+        path: PATHS.COWS,
         children: [
           {
             path: '',
