@@ -15,7 +15,7 @@ function Menu () {
       className={`
       ${
         openMenu ? 'translate-x-0' : '-translate-x-80'
-      } bg-white shadow-sm fixed inset-0 z-50 my-4 ml-4 w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 border`}
+      } bg-white shadow-sm fixed inset-0 z-50 my-4 ml-4 w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 border border-slate-600/20`}
     >
       <div className='m-4 text-center'>
         <Link to='/' className='text-2xl font-bold text-slate-700'>
