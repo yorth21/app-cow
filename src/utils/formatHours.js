@@ -1,4 +1,4 @@
-export function obtenerFormatoFecha (fecha) {
+export function formatHours (fecha) {
   const ahora = new Date()
   const unDia = 24 * 60 * 60 * 1000
 

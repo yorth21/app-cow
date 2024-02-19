@@ -1,8 +1,8 @@
-import { obtenerFormatoFecha } from '../../utils/formatoFecha'
+import { formatHours } from '@/utils/formatHours'
 
 function Card ({ name, value, receivedAt }) {
   const date = new Date(receivedAt)
-  const { dia, hora } = obtenerFormatoFecha(date)
+  const { dia, hora } = formatHours(date)
 
   return (
     <div className='bg-white rounded-xl overflow-hidden shadow-sm'>
