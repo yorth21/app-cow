@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import io from 'socket.io-client'
-import Card from './components/Card'
-import CardObject from './components/CardObject'
+import CardOneProperty from './components/CardOneProperty'
+import CardThreeProperties from './components/CardThreeProperties'
 
 function Cow () {
   const { id } = useParams()
@@ -21,7 +21,6 @@ function Cow () {
     return (
       <div>
         <h1 className='text-xl font-semibold mb-2'>Cow {id}</h1>
-
         <p>No hay datos para mostrar</p>
       </div>
     )
@@ -34,10 +33,12 @@ function Cow () {
       <div className='grid grid-cols-4 gap-4'>
         {Object.entries(dataCollar).map(([key, value]) => {
           if (key.includes('received_at')) return null
+          if (key.includes('aid_vaca')) return null
+
           if (typeof value !== 'object') {
-            return <Card key={key} name={key} value={value} receivedAt={dataCollar.received_at} />
+            return <CardOneProperty key={key} name={key} value={value} />
           } else {
-            return <CardObject key={key} name={key} value={value} receivedAt={dataCollar.received_at} />
+            return <CardThreeProperties key={key} name={key} value={value} receivedAt={dataCollar.received_at} />
           }
         })}
       </div>
