@@ -24,6 +24,10 @@ export const routes = [
           {
             path: ':id',
             element: lazy(async () => await import('@/pages/Cows/pages/Cow'))
+          },
+          {
+            path: ':id/:property',
+            element: lazy(async () => await import('@/pages/Cows/pages/Graph'))
           }
         ]
       }

@@ -3,11 +3,15 @@ import { useParams } from 'react-router-dom'
 import io from 'socket.io-client'
 import CardOneProperty from './components/CardOneProperty'
 import CardThreeProperties from './components/CardThreeProperties'
+import COWS from '@/mocks/cows.json'
 
 function Cow () {
   const { id } = useParams()
 
   const [dataCollar, setDataCollar] = useState(null)
+
+  // eslint-disable-next-line eqeqeq
+  const cow = COWS.find((cow) => cow.id == id)
 
   useEffect(() => {
     const socket = io(import.meta.env.VITE_URL_API_SOCKET)
@@ -20,7 +24,7 @@ function Cow () {
   if (!dataCollar) {
     return (
       <div>
-        <h1 className='text-xl font-semibold mb-2'>Cow {id}</h1>
+        <h1 className='text-xl font-semibold mb-2'>{cow?.name}</h1>
         <p>No hay datos para mostrar</p>
       </div>
     )
@@ -28,7 +32,7 @@ function Cow () {
 
   return (
     <div>
-      <h1 className='text-xl font-semibold mb-2'>Cow {id}</h1>
+      <h1 className='text-xl font-semibold mb-2'>{cow?.name}</h1>
 
       <div className='grid grid-cols-4 gap-4'>
         {Object.entries(dataCollar).map(([key, value]) => {
