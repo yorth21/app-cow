@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { PATHS } from '@/routes/paths'
 
 function CardOneProperty ({ name, value }) {
   return (
