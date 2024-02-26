@@ -6,7 +6,7 @@ function Navbar () {
   const { openMenu, setOpenMenu } = useLayoutContext()
 
   return (
-    <nav className='block w-full max-w-full px-0 py-1'>
+    <nav className='block w-full max-w-full px-0 py-1 mb-4'>
       <div className='flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center'>
         <div className='capitalize'>
           <Breadcrumbs />
