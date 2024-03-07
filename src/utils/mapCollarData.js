@@ -25,6 +25,6 @@ export function mapCollarData (data) {
     gyro: data.gyro,
     acc: data.acc,
     ori: data.ori,
-    __received_at: data.received_at
+    __received_at: new Date(data.received_at)
   }
 }
