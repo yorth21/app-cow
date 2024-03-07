@@ -12,6 +12,8 @@ import {
   Filler
 } from 'chart.js'
 import { io } from 'socket.io-client'
+import { currentDateToSelected } from '@/services/collares.service'
+import { mapCollarData } from '@/utils/mapCollarData'
 
 ChartJS.register(
   CategoryScale,
@@ -29,27 +31,41 @@ const chartOptions = {
     legend: {
       display: false
     }
-  }
+  },
+  slices: 5
 }
 
 function LinesChart ({ id, property }) {
   const [dataPoints, setDataPoints] = useState([])
 
   useEffect(() => {
-    const socket = io(import.meta.env.VITE_URL_API_SOCKET)
+    getCurrentDateToSelected()
+
+    /* const socket = io(import.meta.env.VITE_URL_API_SOCKET)
 
     socket.on(`collar${id}DataUpdated`, (data) => {
-      console.log(data)
+      data = mapCollarData(data)
+      console.log('data', data.__received_at)
       setDataPoints(prevDataPoints => [...prevDataPoints, data])
     })
 
     return () => {
       socket.off(`collar${id}DataUpdated`)
-    }
+    } */
   }, [id])
 
+  const getCurrentDateToSelected = async () => {
+    try {
+      const response = await currentDateToSelected('2023-02-20')
+      const mapData = response.data.map(data => mapCollarData(data))
+      setDataPoints(mapData)
+    } catch (error) {
+      console.log('Error fetching collar data: ', error)
+    }
+  }
+
   const chartData = {
-    labels: dataPoints.map(point => point.received_at),
+    labels: dataPoints.map(point => point.__received_at.toLocaleDateString('es-ES')),
     datasets: [
       {
         label: property,
