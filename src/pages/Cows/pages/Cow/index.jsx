@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import io from 'socket.io-client'
 import COWS from '@/mocks/cows.json'
-import { lastByAid } from './services/collares.service'
-import { mapCollarData } from './data/mapCollarData'
+import { lastByAid } from '@/services/collares.service'
+import { mapCollarData } from '@/utils/mapCollarData'
 import Body from './components/Body'
 
 function Cow () {
