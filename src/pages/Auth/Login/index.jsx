@@ -1,11 +1,18 @@
 import { useState } from 'react'
+import { FaAddressCard, FaLock } from 'react-icons/fa6'
 import escudo from '@/assets/images/escudo.png'
 import InputIcon from '@/components/InputIcon'
-import { FaAddressCard, FaLock } from 'react-icons/fa6'
+import useAuthContext from '@/hooks/useAuthContext'
 
 function Login () {
-  const [user, setUser] = useState('')
+  const { login } = useAuthContext()
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    login({ username, password })
+  }
 
   return (
     <main className='flex justify-center items-center h-screen'>
@@ -20,8 +27,8 @@ function Login () {
 
             <div className='my-4 flex flex-col flex-nowrap gap-2'>
               <InputIcon
-                value={user}
-                setValue={setUser}
+                value={username}
+                setValue={setUsername}
                 label='Usuario'
                 placeholder='Ingresa tu usuario'
                 icon={FaAddressCard}
@@ -38,6 +45,7 @@ function Login () {
 
             <button
               type='submit'
+              onClick={handleSubmit}
               className='bg-slate-800 text-white font-semibold rounded-lg py-2 w-full hover:bg-slate-900 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2'
             >
               Ingresar
