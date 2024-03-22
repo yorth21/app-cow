@@ -1,10 +1,12 @@
 import { Link, NavLink } from 'react-router-dom'
-import { FaHouse, FaCow } from 'react-icons/fa6'
+import { FaHouse, FaCow, FaUser } from 'react-icons/fa6'
 import useLayoutContext from '../hooks/useLayoutContext'
+import { PATHS } from '@/routes/paths'
 
 const OPCIONS = [
-  { name: 'Home', href: '/', icon: FaHouse },
-  { name: 'Cows', href: '/cows', icon: FaCow }
+  { name: 'Home', href: PATHS.HOME, icon: FaHouse },
+  { name: 'Cows', href: PATHS.COWS, icon: FaCow },
+  { name: 'Users', href: PATHS.USERS, icon: FaUser }
 ]
 
 function Menu () {
