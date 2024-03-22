@@ -9,6 +9,7 @@ export const routes = [
   {
     path: PATHS.HOME,
     layout: lazy(async () => await import('@/pages/Shared/Layout')),
+    guard: lazy(async () => await import('@/routes/guards/AuthGuard')),
     children: [
       {
         path: PATHS.HOME,
@@ -30,6 +31,10 @@ export const routes = [
             element: lazy(async () => await import('@/pages/Cows/pages/Graph'))
           }
         ]
+      },
+      {
+        path: PATHS.USERS,
+        element: lazy(async () => await import('@/pages/Users'))
       }
     ]
   }
