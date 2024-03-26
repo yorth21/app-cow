@@ -34,7 +34,20 @@ export const routes = [
       },
       {
         path: PATHS.USERS,
-        element: lazy(async () => await import('@/pages/Users'))
+        children: [
+          {
+            path: '',
+            element: lazy(async () => await import('@/pages/Users'))
+          },
+          {
+            path: 'edit/:id',
+            element: lazy(async () => await import('@/pages/Users/pages/User'))
+          },
+          {
+            path: 'create',
+            element: lazy(async () => await import('@/pages/Users/pages/Create'))
+          }
+        ]
       }
     ]
   }
