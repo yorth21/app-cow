@@ -12,15 +12,18 @@ function AuthProvider ({ children }) {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (token) reconnect()
-  }, [])
+    reconnect()
+  }, [token])
 
   const reconnect = async () => {
+    if (!token) return logout()
+
     setLoading(true)
     try {
       const res = await authReconnect()
       setUser(res.data.username)
       setToken(res.data.token)
+      navigate('/')
     } catch (error) {
       logout()
       console.error('Error reconnecting user.')
@@ -48,7 +51,7 @@ function AuthProvider ({ children }) {
     setUser(null)
   }
 
-  if (loading) return <h1>Loading...</h1>
+  if (loading && user === null) return <h1>Loading...</h1>
 
   return (
     <AuthContext.Provider
