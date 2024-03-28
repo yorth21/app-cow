@@ -3,6 +3,7 @@ import { FaAddressCard, FaLock } from 'react-icons/fa6'
 import escudo from '@/assets/images/escudo.png'
 import InputIcon from '@/components/InputIcon'
 import useAuthContext from '@/hooks/useAuthContext'
+import toast from 'react-hot-toast'
 
 function Login () {
   const { login } = useAuthContext()
@@ -11,6 +12,11 @@ function Login () {
 
   const handleSubmit = async e => {
     e.preventDefault()
+
+    if (!username || !password) {
+      return toast.error('Enter your username and password')
+    }
+
     login({ username, password })
   }
 
@@ -29,16 +35,16 @@ function Login () {
               <InputIcon
                 value={username}
                 setValue={setUsername}
-                label='Usuario'
-                placeholder='Ingresa tu usuario'
+                label='Uername'
+                placeholder='Enter your username'
                 icon={FaAddressCard}
               />
 
               <InputIcon
                 value={password}
                 setValue={setPassword}
-                label='Clave'
-                placeholder='Ingresa tu clave'
+                label='Password'
+                placeholder='Enter your password'
                 icon={FaLock}
               />
             </div>
@@ -48,7 +54,7 @@ function Login () {
               onClick={handleSubmit}
               className='bg-slate-800 text-white font-semibold rounded-lg py-2 w-full hover:bg-slate-900 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2'
             >
-              Ingresar
+              Login
             </button>
           </form>
         </div>
