@@ -1,8 +1,22 @@
-import { FaPencil, FaTrashCan, FaPlus } from 'react-icons/fa6'
-import UsersJson from '@/mocks/users.json'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { FaPencil, FaTrashCan, FaPlus } from 'react-icons/fa6'
+import { get } from './services/users.service'
 
 function Users () {
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
+  const getUsers = async () => {
+    try {
+      const res = await get()
+      setUsers(res.data)
+    } catch (error) {}
+  }
+
   return (
     <div>
       <div className='flex justify-between mb-3'>
@@ -24,7 +38,7 @@ function Users () {
             </tr>
           </thead>
           <tbody>
-            {UsersJson.map((user) => (
+            {users.map((user) => (
               <tr key={user.username}>
                 <td className='px-4 py-1'>{user.username}</td>
                 <td className='px-4 py-1'>{user.email}</td>
@@ -35,9 +49,9 @@ function Users () {
                 }
                 </td>
                 <td className='px-4 py-1 flex gap-2'>
-                  <button aria-label='Edit' className='text-center p-2 rounded-lg transition-colors hover:bg-slate-200'>
+                  <Link to={`edit/${user.username}`} aria-label='Edit' className='text-center p-2 rounded-lg transition-colors hover:bg-slate-200'>
                     <FaPencil />
-                  </button>
+                  </Link>
                   <button aria-label='Delete' className='text-center text-rose-600 p-2 rounded-lg transition-colors hover:bg-rose-200'>
                     <FaTrashCan />
                   </button>
