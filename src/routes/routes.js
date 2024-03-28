@@ -40,8 +40,8 @@ export const routes = [
             element: lazy(async () => await import('@/pages/Users'))
           },
           {
-            path: 'edit/:id',
-            element: lazy(async () => await import('@/pages/Users/pages/User'))
+            path: 'edit/:username',
+            element: lazy(async () => await import('@/pages/Users/pages/Edit'))
           },
           {
             path: 'create',
