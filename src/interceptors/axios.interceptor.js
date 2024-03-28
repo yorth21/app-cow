@@ -1,4 +1,5 @@
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 function AxiosInterceptor () {
   const updateHeader = (request) => {
@@ -33,8 +34,8 @@ function AxiosInterceptor () {
       if (error.response.status === 401) {
         logout()
       }
-
-      return Promise.reject(error.response.data)
+      toast.error(error.response.data.message || 'Error desconocido')
+      return Promise.reject(error)
     }
   )
 }
