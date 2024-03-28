@@ -2,6 +2,8 @@ import { createContext, useEffect, useState } from 'react'
 import useLocalStorage from '@/hooks/useLocalStorage'
 import { authLogin, authReconnect } from '@/services/auth.service'
 import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import LoadingPage from '@/components/LoadingPage'
 
 const AuthContext = createContext()
 
@@ -23,27 +25,21 @@ function AuthProvider ({ children }) {
       const res = await authReconnect()
       setUser(res.data.username)
       setToken(res.data.token)
-      navigate('/')
     } catch (error) {
+      toast.error('Session expired, please login again.')
       logout()
-      console.error('Error reconnecting user.')
     } finally {
       setLoading(false)
     }
   }
 
   const login = async (credentials) => {
-    setLoading(true)
     try {
       const res = await authLogin(credentials)
       setUser(credentials.username)
       setToken(res.data.token)
       navigate('/')
-    } catch (error) {
-      console.log('Error logging in.')
-    } finally {
-      setLoading(false)
-    }
+    } catch (error) {}
   }
 
   const logout = () => {
@@ -51,15 +47,14 @@ function AuthProvider ({ children }) {
     setUser(null)
   }
 
-  if (loading && user === null) return <h1>Loading...</h1>
+  if (loading && user === null) return <LoadingPage />
 
   return (
     <AuthContext.Provider
       value={{
         user,
         login,
-        logout,
-        loading
+        logout
       }}
     >
       {children}
