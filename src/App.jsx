@@ -2,11 +2,9 @@ import { BrowserRouter, Routes } from 'react-router-dom'
 import { routes } from './routes/routes'
 import renderRoutes from './routes'
 import { AuthProvider } from '@/contexts/authContext'
-import { AxiosInterceptor } from './interceptors/axios.interceptor'
+import { Toaster } from 'react-hot-toast'
 
 function App () {
-  AxiosInterceptor()
-
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -14,6 +12,7 @@ function App () {
           {renderRoutes(routes)}
         </Routes>
       </AuthProvider>
+      <Toaster position='bottom-right' />
     </BrowserRouter>
   )
 }
