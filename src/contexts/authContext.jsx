@@ -23,7 +23,11 @@ function AuthProvider ({ children }) {
     setLoading(true)
     try {
       const res = await authReconnect()
-      setUser(res.data.username)
+      setUser({
+        username: res.data.username,
+        email: res.data.email,
+        role: res.data.role
+      })
       setToken(res.data.token)
     } catch (error) {
       toast.error('Session expired, please login again.')
@@ -36,7 +40,11 @@ function AuthProvider ({ children }) {
   const login = async (credentials) => {
     try {
       const res = await authLogin(credentials)
-      setUser(credentials.username)
+      setUser({
+        username: res.data.username,
+        email: res.data.email,
+        role: res.data.role
+      })
       setToken(res.data.token)
       navigate('/')
     } catch (error) {}
