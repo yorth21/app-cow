@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom'
 import { FaPencil, FaTrashCan } from 'react-icons/fa6'
 
-function TableUsers ({ users }) {
+function TableUsers ({ users, editUser, deleteUser }) {
   return (
     <table className='table-auto border-separate border-spacing-2 -mx-2'>
       <thead className='text-left'>
@@ -24,12 +23,16 @@ function TableUsers ({ users }) {
                 }
             </td>
             <td className='px-4 py-1 flex gap-2'>
-              <Link to={`edit/${user.username}`} aria-label='Edit' className='text-center p-2 rounded-lg transition-colors hover:bg-slate-200'>
+              <button
+                onClick={() => editUser(user.username)}
+                aria-label='Edit'
+                className='text-center p-2 rounded-lg transition-colors hover:bg-slate-200'
+              >
                 <FaPencil />
-              </Link>
+              </button>
               <button
                 aria-label='Delete'
-                onClick={() => console.log('del ' + user.username)}
+                onClick={() => deleteUser(user.username)}
                 className='text-center text-rose-600 p-2 rounded-lg transition-colors hover:bg-rose-200'
               >
                 <FaTrashCan />
