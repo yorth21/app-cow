@@ -11,7 +11,7 @@ function renderRoutes (routes) {
         key={index}
         path={route.path}
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={null}>
             <Layout>
               {route.children ? <Outlet /> : <Component />}
             </Layout>
