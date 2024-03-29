@@ -3,7 +3,7 @@ import { PATHS } from '@/routes/paths'
 
 function Card ({ cow }) {
   return (
-    <Link to={`/${PATHS.COWS}/${cow.id}`}>
+    <Link to={`${PATHS.COWS}/${cow.id}`}>
       <div className='bg-white shadow-sm rounded-lg p-3 border border-slate-800/20'>
         <div className='flex items-center gap-6'>
           <img
