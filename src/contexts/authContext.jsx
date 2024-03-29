@@ -15,7 +15,7 @@ function AuthProvider ({ children }) {
 
   useEffect(() => {
     reconnect()
-  }, [token])
+  }, [])
 
   const reconnect = async () => {
     if (!token) return logout()
