@@ -1,19 +1,17 @@
-import { FaBars, FaArrowRightToBracket } from 'react-icons/fa6'
+import { FaBars } from 'react-icons/fa6'
 import Breadcrumbs from './Breadcrumbs'
 import useLayoutContext from '../hooks/useLayoutContext'
-import useAuthContext from '@/hooks/useAuthContext'
 
 function Navbar () {
-  const { logout } = useAuthContext()
   const { openMenu, setOpenMenu } = useLayoutContext()
 
   return (
     <nav className='block w-full max-w-full px-0 py-1 mb-4'>
-      <div className='flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center'>
+      <div className='my-2.5 flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center'>
         <div className='capitalize'>
           <Breadcrumbs />
         </div>
-        <div className='flex gap-2 text-xl'>
+        <div className='flex gap-2 justify-between text-xl'>
           <button
             className={`
             ${
@@ -23,13 +21,6 @@ function Navbar () {
             onClick={() => setOpenMenu(!openMenu)}
           >
             <FaBars />
-          </button>
-          <button
-            className='text-center p-2.5 rounded-lg flex items-center transition-all hover:bg-slate-200'
-            aria-label='Cerrar sesion'
-            onClick={logout}
-          >
-            <FaArrowRightToBracket />
           </button>
         </div>
       </div>
