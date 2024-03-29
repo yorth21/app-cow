@@ -1,10 +1,27 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaPlus } from 'react-icons/fa6'
 import TableUsers from '../../components/TableUsers'
 import useUsersContext from '../../hooks/useUsersContext'
+import { ConfirmAlert } from '@/utils/confirmAlert'
 
 function Home () {
-  const { users } = useUsersContext()
+  const { users, delUser } = useUsersContext()
+  const navigate = useNavigate()
+
+  const handleEditUser = (username) => {
+    navigate(`edit/${username}`)
+  }
+
+  const handleDeleteUser = (username) => {
+    ConfirmAlert({
+      title: 'Delete User',
+      text: `Are you sure you want to delete ${username}?`,
+      onConfirm: async () => {
+        await delUser(username)
+      },
+      onCancel: () => {}
+    })
+  }
 
   return (
     <div>
@@ -17,7 +34,11 @@ function Home () {
       </div>
 
       <div className=''>
-        <TableUsers users={users} />
+        <TableUsers
+          users={users}
+          editUser={handleEditUser}
+          deleteUser={handleDeleteUser}
+        />
       </div>
     </div>
   )
