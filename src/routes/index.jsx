@@ -5,6 +5,7 @@ function renderRoutes (routes) {
   return routes.map((route, index) => {
     const Component = route.element || Fragment
     const Layout = route.layout || Fragment
+    const Guard = route.guard || Fragment
 
     return (
       <Route
@@ -12,9 +13,11 @@ function renderRoutes (routes) {
         path={route.path}
         element={
           <Suspense fallback={null}>
-            <Layout>
-              {route.children ? <Outlet /> : <Component />}
-            </Layout>
+            <Guard>
+              <Layout>
+                {route.children ? <Outlet /> : <Component />}
+              </Layout>
+            </Guard>
           </Suspense>
         }
       >

@@ -1,8 +1,10 @@
 import { FaBars, FaArrowRightToBracket } from 'react-icons/fa6'
 import Breadcrumbs from './Breadcrumbs'
 import useLayoutContext from '../hooks/useLayoutContext'
+import useAuthContext from '@/hooks/useAuthContext'
 
 function Navbar () {
+  const { logout } = useAuthContext()
   const { openMenu, setOpenMenu } = useLayoutContext()
 
   return (
@@ -25,6 +27,7 @@ function Navbar () {
           <button
             className='text-center p-2.5 rounded-lg flex items-center transition-all hover:bg-slate-200'
             aria-label='Cerrar sesion'
+            onClick={logout}
           >
             <FaArrowRightToBracket />
           </button>
