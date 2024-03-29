@@ -43,6 +43,7 @@ function Login () {
               <InputIcon
                 value={password}
                 setValue={setPassword}
+                type='password'
                 label='Password'
                 placeholder='Enter your password'
                 icon={FaLock}
