@@ -1,9 +1,11 @@
 import Input from '@/components/Input'
 import { useState } from 'react'
-import { createUser } from '../../services/users.service'
 import toast from 'react-hot-toast'
+import useUsersContext from '../../hooks/useUsersContext'
 
 function Create () {
+  const { postUser } = useUsersContext()
+
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -23,16 +25,14 @@ function Create () {
       return toast.error('All fields are required')
     }
 
-    const user = {
-      username,
-      email,
-      password,
-      role
-    }
-
     try {
-      const res = await createUser(user)
-      toast.success(res.data.message)
+      postUser({
+        username,
+        email,
+        password,
+        role
+      })
+
       clearForm()
     } catch (error) {}
   }
