@@ -34,10 +34,11 @@ export const routes = [
       },
       {
         path: PATHS.USERS,
+        layout: lazy(async () => await import('@/pages/Users')),
         children: [
           {
             path: '',
-            element: lazy(async () => await import('@/pages/Users'))
+            element: lazy(async () => await import('@/pages/Users/pages/Home'))
           },
           {
             path: 'edit/:username',
