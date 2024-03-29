@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import toast from 'react-hot-toast'
 import Input from '@/components/Input'
 import useUsersContext from '../../hooks/useUsersContext'
 
 function Edit () {
-  const { getUserByUsername } = useUsersContext()
+  const { getUserByUsername, putUser } = useUsersContext()
   const { username } = useParams()
 
   const [email, setEmail] = useState('')
@@ -18,14 +17,21 @@ function Edit () {
 
   const getUser = async () => {
     const user = await getUserByUsername(username)
-    // setEmail(user.email)
-    // setRole(user.role)
+    setEmail(user.email)
+    setRole(user.role)
   }
 
   const handleOnSubmit = async (event) => {
     event.preventDefault()
 
-    console.log('edit')
+    try {
+      await putUser({
+        username,
+        email,
+        password,
+        role
+      })
+    } catch (error) {}
   }
 
   return (
@@ -44,9 +50,9 @@ function Edit () {
 
           <Input
             id='password'
-            label='Password'
+            label='New password'
             type='password'
-            placeholder='Enter password'
+            placeholder='Enter new password'
             value={password}
             setValue={setPassword}
           />
@@ -74,7 +80,7 @@ function Edit () {
           <button
             type='submit'
             className='bg-slate-800 flex justify-center items-center text-white font-semibold rounded-lg py-1 px-4 hover:bg-slate-900 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2'
-          >Create
+          >Update
           </button>
         </div>
       </form>
