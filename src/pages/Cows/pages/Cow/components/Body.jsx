@@ -1,7 +1,11 @@
+import { diffDateString } from '@/utils/diffDateString'
 import CardOneProperty from './CardOneProperty'
 import CardThreeProperties from './CardThreeProperties'
 
 function Body ({ dataCollar }) {
+  const lastUpdate = dataCollar.__received_at
+  const currentDate = new Date()
+
   return (
     <div className='flex flex-col'>
       <div className='flex justify-between mb-2 items-end'>
@@ -9,7 +13,7 @@ function Body ({ dataCollar }) {
 
         <div className='flex flex-col text-sm text-right'>
           <span>Ultima actualizacion</span>
-          <span className='-mt-1 font-bold'>hace un momento</span>
+          <span className='-mt-1 font-bold'>{diffDateString(currentDate, lastUpdate)}</span>
         </div>
       </div>
 
