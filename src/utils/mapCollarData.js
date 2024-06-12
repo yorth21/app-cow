@@ -16,7 +16,6 @@ export function mapCollarData (data) {
     gasesg: data.gasesg,
     activ: data.activ,
     iaq_regul: data.iaq_regul,
-    iaq_estat: data.iaq_estat,
     compu_org_volat: data.compu_org_volat,
     co2_nicla: data.co2_nicla,
     batt: data.batt,
